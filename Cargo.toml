@@ -1,0 +1,52 @@
+[package]
+name = "port-file"
+version = "0.1.0"
+description = "Publish a server's bound socket address to a file, and discover it from a test harness without racy port probing."
+readme = "README.md"
+documentation = "https://docs.rs/port-file"
+repository = "https://github.com/oxidecomputer/port-file"
+keywords = ["port", "socket", "test", "harness", "ephemeral"]
+categories = ["development-tools::testing", "network-programming"]
+edition = "2024"
+license = "MIT OR Apache-2.0"
+rust-version = "1.86"
+
+[package.metadata.docs.rs]
+all-features = true
+rustdoc-args = ["--cfg=doc_cfg"]
+
+[lints.rust]
+unexpected_cfgs = { level = "warn", check-cfg = ["cfg(doc_cfg)"] }
+
+[dependencies]
+atomicwrites = "0.4.4"
+camino = "1.2.2"
+tokio = { version = "1.49", features = ["fs", "time"], optional = true }
+
+[dev-dependencies]
+camino-tempfile = "1.4.1"
+clap = { version = "4.6.1", features = ["derive"] }
+tokio = { version = "1.49", features = ["fs", "time", "process", "macros", "rt", "test-util"] }
+
+[features]
+default = []
+# Enables the async `wait_for` convenience wrapper (built on tokio). The pure
+# `poll_once` core, the writer, and `wait_for_blocking` are available without
+# it.
+tokio = ["dep:tokio"]
+
+[package.metadata.cargo-sync-rdme.badge.badges]
+license = true
+crates-io = true
+docs-rs = true
+rust-version = true
+
+[package.metadata.release]
+pre-release-replacements = [
+    { file = "CHANGELOG.md", search = "Unreleased", replace = "[{{version}}]", min = 1 },
+    { file = "CHANGELOG.md", search = "ReleaseDate", replace = "{{date}}", min = 1 },
+    { file = "CHANGELOG.md", search = "<!-- next-header -->", replace = "<!-- next-header -->\n## Unreleased - ReleaseDate\n", exactly = 1 },
+    { file = "CHANGELOG.md", search = "<!-- next-url -->", replace = "<!-- next-url -->\n[{{version}}]: https://github.com/oxidecomputer/port-file/releases/tag/port-file-{{version}}", exactly = 1 },
+]
+
+[workspace]

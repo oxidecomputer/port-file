@@ -1,0 +1,4 @@
+/target
+/mutants.out*
+# Hegel property-test failure database, created on failing local runs.
+/.hegel/
