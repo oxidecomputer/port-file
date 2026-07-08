@@ -114,9 +114,8 @@ let addr: SocketAddr = match port_file::wait_for_blocking(
         // The child is not stopped automatically on failure, so remember
         // to kill and reap it so it doesn't outlive the supervisor.
         //
-        // In this example, we ignore cleanup errors (kill fails if the
-        // child has already exited), since the error (wait_for_blocking)
-        // is the one worth reporting.
+        // In this example, we ignore cleanup errors, since the error
+        // produced by wait_for_blocking is the one worth reporting.
         let _ = child.kill();
         let _ = child.wait();
         return Err(error.into());
@@ -165,6 +164,14 @@ If your service can run within the same process as the supervisor, you may
 simply be able to make an in-memory function call to the service to get the
 bound port.
 
+### Query the kernel
+
+You can use tools like [`ss`] or [`lsof`] on Linux, or equivalents on other
+operating systems, to see which sockets a child process has active. But this
+is a heavyweight approach for a purely user-level concern. This approach has
+also been known to [cause process
+crashes](https://www.illumos.org/issues/18222) in some situations.
+
 ### Unix domain sockets
 
 Instead of a TCP or UDP port, you can use a [Unix domain socket] (UDS), also
@@ -183,6 +190,8 @@ ephemeral ports. But this has a few limitations:
   transport layer.
 
 [`SocketAddr`]: https://doc.rust-lang.org/nightly/core/net/socket_addr/enum.SocketAddr.html
+[`ss`]: https://man7.org/linux/man-pages/man8/ss.8.html
+[`lsof`]: https://man7.org/linux/man-pages/man8/lsof.8.html
 [Unix domain socket]: https://doc.rust-lang.org/nightly/std/os/unix/net/listener/struct.UnixListener.html
 [hyperlocal]: https://crates.io/crates/hyperlocal
 [`unix_socket` method]: https://docs.rs/reqwest/0.13/reqwest/struct.ClientBuilder.html#method.unix_socket

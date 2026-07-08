@@ -164,6 +164,14 @@
 //! simply be able to make an in-memory function call to the service to get the
 //! bound port.
 //!
+//! ## Query the kernel
+//!
+//! You can use tools like [`ss`] or [`lsof`] on Linux, or equivalents on other
+//! operating systems, to see which sockets a child process has active. But this
+//! is a heavyweight approach for a purely user-level concern. This approach has
+//! also been known to [cause process
+//! crashes](https://www.illumos.org/issues/18222) in some situations.
+//!
 //! ## Unix domain sockets
 //!
 //! Instead of a TCP or UDP port, you can use a [Unix domain socket] (UDS), also
@@ -185,6 +193,8 @@
 //! [Unix domain socket]: std::os::unix::net::UnixListener
 //! [hyperlocal]: https://crates.io/crates/hyperlocal
 //! [`unix_socket` method]: https://docs.rs/reqwest/0.13/reqwest/struct.ClientBuilder.html#method.unix_socket
+//! [`ss`]: https://man7.org/linux/man-pages/man8/ss.8.html
+//! [`lsof`]: https://man7.org/linux/man-pages/man8/lsof.8.html
 
 mod read;
 mod write;
