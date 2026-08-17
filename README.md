@@ -131,11 +131,11 @@ println!("service is listening at {addr}");
 ### Notes
 
 The port file must not already exist. A write to an existing file will fail
-with a [`WriteStage::Persist`](https://docs.rs/port-file/0.1.0/port_file/write/enum.WriteStage.html#variant.Persist) error. It is strongly recommended that a
+with a [`WriteStage::Persist`] error. It is strongly recommended that a
 fresh temporary directory is used to store the port file in.
 
-If you’re using Tokio, use [`wait_for`](https://docs.rs/port-file/0.1.0/port_file/read/fn.wait_for.html) instead, which is the async
-equivalent of [`wait_for_blocking`](https://docs.rs/port-file/0.1.0/port_file/read/fn.wait_for_blocking.html).
+If you’re using Tokio, use [`wait_for`] instead, which is the async
+equivalent of [`wait_for_blocking`].
 
 ### Extensions
 
@@ -153,7 +153,7 @@ This crate is quite minimal and straightforward. You’re welcome to write
 your own version of this. There are a few details this crate gets right that
 you may want to copy. In particular:
 
-* The write side uses [atomic writes](https://docs.rs/atomicwrites/0.4.4/atomicwrites/index.html) and refuses to overwrite
+* The write side uses [atomic writes][atomicwrites] and refuses to overwrite
   existing files.
 * The read side has careful handling for permanent errors to avoid waiting
   out the entire timeout.
@@ -189,10 +189,14 @@ ephemeral ports. But this has a few limitations:
   test and production code. Bugs can often be specific to a particular
   transport layer.
 
-[`SocketAddr`]: https://doc.rust-lang.org/nightly/core/net/socket_addr/enum.SocketAddr.html
+[`SocketAddr`]: https://doc.rust-lang.org/nightly/core/net/socket_addr/enum.SocketAddr.html "enum core::net::socket_addr::SocketAddr"
+[`WriteStage::Persist`]: https://docs.rs/port-file/0.1.0/port_file/write/enum.WriteStage.html#variant.Persist "variant port_file::write::WriteStage::Persist"
+[`wait_for`]: https://docs.rs/port-file/0.1.0/port_file/read/fn.wait_for.html "fn port_file::read::wait_for"
+[`wait_for_blocking`]: https://docs.rs/port-file/0.1.0/port_file/read/fn.wait_for_blocking.html "fn port_file::read::wait_for_blocking"
+[atomicwrites]: https://docs.rs/atomicwrites/0.4.4/atomicwrites/index.html "module atomicwrites"
 [`ss`]: https://man7.org/linux/man-pages/man8/ss.8.html
 [`lsof`]: https://man7.org/linux/man-pages/man8/lsof.8.html
-[Unix domain socket]: https://doc.rust-lang.org/nightly/std/os/unix/net/listener/struct.UnixListener.html
+[Unix domain socket]: https://doc.rust-lang.org/nightly/std/os/unix/net/listener/struct.UnixListener.html "struct std::os::unix::net::listener::UnixListener"
 [hyperlocal]: https://crates.io/crates/hyperlocal
 [`unix_socket` method]: https://docs.rs/reqwest/0.13/reqwest/struct.ClientBuilder.html#method.unix_socket
 <!-- cargo-sync-rdme ]] -->
