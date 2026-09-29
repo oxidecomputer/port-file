@@ -189,14 +189,14 @@ ephemeral ports. But this has a few limitations:
   test and production code. Bugs can often be specific to a particular
   transport layer.
 
-[`SocketAddr`]: https://doc.rust-lang.org/nightly/core/net/socket_addr/enum.SocketAddr.html "enum core::net::socket_addr::SocketAddr"
+[`SocketAddr`]: https://doc.rust-lang.org/stable/core/net/socket_addr/enum.SocketAddr.html "enum core::net::socket_addr::SocketAddr"
 [`WriteStage::Persist`]: https://docs.rs/port-file/0.1.0/port_file/write/enum.WriteStage.html#variant.Persist "variant port_file::write::WriteStage::Persist"
 [`wait_for`]: https://docs.rs/port-file/0.1.0/port_file/read/fn.wait_for.html "fn port_file::read::wait_for"
 [`wait_for_blocking`]: https://docs.rs/port-file/0.1.0/port_file/read/fn.wait_for_blocking.html "fn port_file::read::wait_for_blocking"
-[atomicwrites]: https://docs.rs/atomicwrites/0.4.4/atomicwrites/index.html "module atomicwrites"
+[atomicwrites]: https://docs.rs/atomicwrites/0.4.4/atomicwrites/index.html "mod atomicwrites"
 [`ss`]: https://man7.org/linux/man-pages/man8/ss.8.html
 [`lsof`]: https://man7.org/linux/man-pages/man8/lsof.8.html
-[Unix domain socket]: https://doc.rust-lang.org/nightly/std/os/unix/net/listener/struct.UnixListener.html "struct std::os::unix::net::listener::UnixListener"
+[Unix domain socket]: https://doc.rust-lang.org/stable/std/os/unix/net/listener/struct.UnixListener.html "struct std::os::unix::net::listener::UnixListener"
 [hyperlocal]: https://crates.io/crates/hyperlocal
 [`unix_socket` method]: https://docs.rs/reqwest/0.13/reqwest/struct.ClientBuilder.html#method.unix_socket
 <!-- cargo-sync-rdme ]] -->
